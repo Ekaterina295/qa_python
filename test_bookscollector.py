@@ -121,3 +121,21 @@ class TestBooksCollector:
         collector.set_book_genre('Три богатыря', 'Мультфильмы')
         assert collector.get_books_for_children() == ['Война и мир', 'Три богатыря']
 
+# Успешно получаем жанр книги по её имени
+
+    def test_get_book_genre_success(self):
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.set_book_genre('Война и мир', 'Фантастика')
+        assert collector.get_book_genre('Война и мир') == 'Фантастика'
+
+# Получаем словарь books_genre
+    def test_get_books_genre_success(self):
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.set_book_genre('Война и мир', 'Фантастика')
+        collector.add_new_book('Преступление и наказание')
+        collector.set_book_genre('Преступление и наказание', 'Детективы')
+        expected_genre = {'Война и мир': 'Фантастика', 'Преступление и наказание': 'Детективы'}
+        assert collector.get_books_genre() == expected_genre
+
